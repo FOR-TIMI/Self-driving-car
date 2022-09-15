@@ -5,10 +5,41 @@ class Sensor{
         this.rayCount = 5; //number of ray lines
         this.raySpread= Math.PI/2; //90 degrees for the angle of the array spread
         this.rays = [];
+        this.readings = [];
     }
 
-    update(){
+    update(roadBorders){
         this.#castRays();
+        this.readings = [];
+        for(let i=0; i< this.rays.length; i++ ){
+            this.readings.push(
+                this.#getReading(this.rays[i], roadBorders)
+            );
+        }
+    }
+
+    #getReading(ray,roadBorders){
+        let contacts = [];
+
+        for(let i = 0; i <roadBorders.length; i++){
+            const contact = getIntersection(
+                ray[0],
+                ray[1],
+                roadBorders[i][0],
+                roadBorders[i][1]
+            );
+            if(contact){
+                contacts.push(contact)
+            }
+        }
+
+        if(contacts.length ===0 ){
+            return null
+        } else{
+            const offsets = contacts.map(el => el.offset);
+            const minOffset = Math.min(...offsets);
+            return contacts.find(el => el.offset == minOffset);
+        }
     }
 
     #castRays(){
@@ -34,16 +65,35 @@ class Sensor{
 
     draw(context){
         for(let i=0; i < this.rayCount; i++){
+            let end = this.rays[i]?.[1];
+            if(this.readings){
+                end = this.readings[i];
+            }
             context.beginPath();
             context.lineWidth=2;
             context.strokeStyle = "yellow";
      
              
-            context.moveTo(this.rays[i]?.[0].x,this.rays[i]?.[0].y);
+            context.moveTo(this.rays[i]?.[0].x,
+                            this.rays[i]?.[0].y);
 
             context.lineTo(
-                this.rays[i]?.[1].x,
-                this.rays[i]?.[1].y
+                end?.x,
+                end?.y
+            );
+
+            context.stroke();
+
+            context.beginPath();
+            context.lineWidth=2;
+            context.strokeStyle = "red";
+     
+             
+            context.moveTo(this.rays[i]?.[1].x,this.rays[i]?.[1].y);
+
+            context.lineTo(
+                end?.x,
+                end?.y
             );
 
             context.stroke();

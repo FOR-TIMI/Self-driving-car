@@ -23,7 +23,7 @@ car.draw(context);
 
 //Animation to moke the car
 function animate(){
-   car.update();
+   car.update(road.borders);
    //After an update we need to resize the canvas
    canvas.height = window.innerHeight;
 
