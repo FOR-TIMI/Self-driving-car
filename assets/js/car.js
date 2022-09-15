@@ -29,52 +29,56 @@ class Car{
     }
 
     update(){
+      this.move();
+    }
+
+    move(){
         //To control the forward movement of the car
-        if(this.controls.forwardMovement){
-            this.speed+=this.acceleration;
-        }
-        //To control the backward movement of the car
-        if(this.controls.backwardMovement){
-            this.speed-=this.acceleration;
-        }
-        //To set top speed so the car doesn't move too fast
-        if(this.speed > this.maxSpeed){
-            this.speed = this.maxSpeed;
-        }
-        //To account for the car backward movement
-        if(this.speed <- this.maxSpeed/2){
-            this.speed = -this.maxSpeed/2;
-        }
-
-
-
-        //Do decrease the speed based on friction
-        if(this.speed > 0){
-            this.speed-= this.friction;
-        }
-        if(this.speed < 0){
-            this.speed+= this.friction;
-        }
-        if(Math.abs(this.speed) < this.friction){
-            this.park();
-        }
-
-
-        //left controls
-        if(this.speed!=0){
-            const flip = this.speed >0 ?1:-1;
-            if(this.controls.leftMovement){
-                this.angle += 0.03*flip;
-            }
-            // right Controls 
-            if(this.controls.rightMovement){
-                this.angle -= 0.03*flip;
-            }
-        }
-
-        this.positionX -= Math.sin(this.angle)*this.speed;
-        this.positionY -= Math.cos(this.angle)*this.speed;
-
+                if(this.controls.forwardMovement){
+                    this.speed+=this.acceleration;
+                }
+                //To control the backward movement of the car
+                if(this.controls.backwardMovement){
+                    this.speed-=this.acceleration;
+                }
+                //To set top speed so the car doesn't move too fast
+                if(this.speed > this.maxSpeed){
+                    this.speed = this.maxSpeed;
+                }
+                //To account for the car backward movement
+                if(this.speed <- this.maxSpeed/2){
+                    this.speed = -this.maxSpeed/2;
+                }
+        
+        
+        
+                //Do decrease the speed based on friction
+                if(this.speed > 0){
+                    this.speed-= this.friction;
+                }
+                if(this.speed < 0){
+                    this.speed+= this.friction;
+                }
+                if(Math.abs(this.speed) < this.friction){
+                    this.park();
+                }
+        
+        
+                //left controls
+                if(this.speed!=0){
+                    const flip = this.speed >0 ?1:-1;
+                    if(this.controls.leftMovement){
+                        this.angle += 0.03*flip;
+                    }
+                    // right Controls 
+                    if(this.controls.rightMovement){
+                        this.angle -= 0.03*flip;
+                    }
+                }
+        
+                this.positionX -= Math.sin(this.angle)*this.speed;
+                this.positionY -= Math.cos(this.angle)*this.speed;
+        
     }
     
     
