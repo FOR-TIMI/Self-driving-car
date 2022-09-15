@@ -26,8 +26,13 @@ function animate(){
    car.update();
    //After an update we need to resize the canvas
    canvas.height = window.innerHeight;
+
+   context.save();
+   context.translate(0,-car.positionY+canvas.height*0.7);
    road.draw(context)
    car.draw(context);
+   context.restore();
+
    //This calls the animatecar method over and over again
    //Updating the car's position
    requestAnimationFrame(animate);
