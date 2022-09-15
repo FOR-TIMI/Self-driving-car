@@ -66,6 +66,7 @@ class Sensor{
     draw(context){
         for(let i=0; i < this.rayCount; i++){
             let end = this.rays[i]?.[1];
+
             if(this.readings){
                 end = this.readings[i];
             }
@@ -78,8 +79,8 @@ class Sensor{
                             this.rays[i]?.[0].y);
 
             context.lineTo(
-                end?.x,
-                end?.y
+                this.rays[i]?.[1]?.x,
+                this.rays[i]?.[1]?.y
             );
 
             context.stroke();
