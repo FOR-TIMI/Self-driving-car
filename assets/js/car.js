@@ -19,7 +19,8 @@ class Car{
        //Controls car direction
         this.controls = new Controls();
 
-
+        //create new Sensor for the car
+        this.sensor = new Sensor(this);
 
 
     }
@@ -30,6 +31,7 @@ class Car{
 
     update(){
       this.#move();
+      this.sensor.update();
     }
 
     #move(){
@@ -102,6 +104,9 @@ class Car{
        );
        context.fill();
        context.restore();
+       
+       this.sensor.draw(context);
+
     }
     
 }
