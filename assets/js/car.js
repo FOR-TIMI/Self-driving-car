@@ -29,10 +29,10 @@ class Car{
     }
 
     update(){
-      this.move();
+      this.#move();
     }
 
-    move(){
+    #move(){
         //To control the forward movement of the car
                 if(this.controls.forwardMovement){
                     this.speed+=this.acceleration;

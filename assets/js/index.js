@@ -12,6 +12,9 @@ canvas.width = 200;
 //Section To draw on the canvas
 const context = canvas.getContext("2d");
 
+//To create the road;
+const road = new Road(canvas.width/2,canvas.width*0.9);
+
 //create a new car
 const car = new Car(100,100,30,50);
 car.draw(context);
@@ -23,6 +26,7 @@ function animate(){
    car.update();
    //After an update we need to resize the canvas
    canvas.height = window.innerHeight;
+   road.draw(context)
    car.draw(context);
    //This calls the animatecar method over and over again
    //Updating the car's position
